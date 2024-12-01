@@ -14,7 +14,7 @@ namespace TicketAssig.DAL
         public List<ListViewItem> getTicketList(int userID)
         {
             List<ListViewItem> items = new();
-            MySqlConnection sqlCon = new MySqlConnection(sqlString);
+            using MySqlConnection sqlCon = new MySqlConnection(sqlString);
             MySqlCommand cmd = new MySqlCommand("SELECT (SELECT name FROM events WHERE events.eventid = tickets.eventid), amount FROM tickets WHERE userid = @userID;", sqlCon);
             cmd.Parameters.AddWithValue("@userID", userID);
 
